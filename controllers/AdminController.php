@@ -12,14 +12,8 @@
 		return $orders;
 	}
 
-	function toggle_user($action, $type) {
+	function toggle_user($id, $action, $type) {
 		$status = false;
-		$x = explode("-",$type);
-		$type = $x[0];
-		$id = $x[1];
-		var_dump($type);
-		var_dump($id);
-		die();
 
 		if ($action == "update") {
 			$status = safe_query("UPDATE users SET user_type = '$type' WHERE id = '$id'");
@@ -84,11 +78,7 @@
 	if (isset($_GET['action']) && $admin_view == 'catalog') {
 		toggle_product($_GET['id'], $_GET['action']);
 	}
-
-	if (isset($_POST['update'])) {
-		toggle_user($_POST['update'], $_POST['user_type']);
-	}
-
-	if (isset($_POST['delete'])) {
-		toggle_user($_POST['delete'], $_POST['user_type']);
+	
+	if (isset($_GET['action']) && isset($_GET['id']) && isset($_GET['type']) && $admin_view == 'users') {
+		toggle_user($_GET['id'], $_GET['action'], $_GET['type']);
 	}

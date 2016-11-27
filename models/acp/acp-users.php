@@ -16,32 +16,41 @@
 			</thead>
 			<tbody>
 				<? foreach ($user_results['users'] as $user) { ?>
-					<tr>
-						<td><? echo $user["id"]; ?></td>
-						<td>
-							<select class="form-control" name="user_type" form="change_type"<?php echo ($_SESSION['user_level'] < 3) ? ' disabled' : ''; ?>>
-								<option value="<? echo $user["user_type"]; ?>" selected="selected"><? echo $user["user_type"]; ?></option>
-								<?
-									$types = array("guest" => "guest","member" => "member","privi" => "privi","admin" => "admin");
-									$x = $user['user_type'];
-									unset($types[$x]);
-								?>
-							<? foreach($types as $key => $value) { ?>
-								<option value="<? echo $value . '-' . $user["id"]; ?>"><? echo $key; ?></option>
-							<? } ?>
-							</select>
-						</td>
-						<td><? echo $user["username"]; ?></td>
-						<td><? echo $user["email"]; ?></td>
-						<td>
-							<a form="change_type" type="submit" name="update[]" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> Update</a>
-							<a form="change_type" type="submit" name="delete[]" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</a>
-						</td>
-					</tr>
+					<form method="get" action="admin.php">
+						<tr>
+							<td>
+								<? echo $user["id"]; ?>
+								<input type="hidden" name="id" value="<? echo $user["id"]; ?>" />	
+							</td>
+							<td>
+								<select class="form-control" name="type" <?php echo ($_SESSION['user_level'] < 3) ? ' disabled' : ''; ?>>
+									<option value="<? echo $user["user_type"]; ?>" selected="selected"><? echo $user["user_type"]; ?></option>
+									<?
+										$types = array("guest" => "guest","member" => "member","privi" => "privi","admin" => "admin");
+										$x = $user['user_type'];
+										unset($types[$x]);
+									?>
+								<? foreach($types as $key => $value) { ?>
+									<option value="<? echo $value ?>"><? echo $key ?></option>
+								<? } ?>
+								</select>
+							</td>
+							<td><? echo $user["username"]; ?></td>
+							<td><? echo $user["email"]; ?></td>
+							<td>
+								<select class="form-control" name="action">
+									<option value="update">Update</option>
+									<option value="delete">Delete</option>
+								</select>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-send"></span> Submit</button>
+							</td>
+						</tr>
+					</form>
 				<? } ?>
 			</tbody>
 		</table>
-		<form action="admin.php?view=catalog" method="post" id="change_type"<?php echo ($_SESSION['user_level'] < 3) ? ' disabled' : ''; ?>></form>
 	</div>
 </div>
 <div class="col-xs-12 text-center">
