@@ -85,6 +85,87 @@
 			<div class="contact">
 				<hr/>
 				<h2 id="contact_us">Contact Us</h2>
+		<div id="page-wrap">
+				
+		<div id="contact">
+			
+			<form method="get" action="about.php">
+				<label for="Name">First name:</label>
+				<input type="text" name="first" id="first" value="<?php if(isset($first)) echo $first; ?>">
+				
+				
+				<label for="City">Last name:</label>
+				<input type="text" name="last" id="last" value="<?php if(isset($last)) echo $last; ?>">
+				
+	
+				<label for="Email">Email:</label>
+				<input type="text" name="email" id="email" value="<?php if(isset($email)) echo $email; ?>">
+				
+				
+				<label for="Message">Questions:</label><br>
+				<textarea name="qcc" rows="20" cols="20" id="qcc" value="<?php if(isset($qcc)) echo $qcc; ?>"></textarea>
+				
+
+				<input type="submit" name="submit" value="Submit" class="submit-button">
+			</form>
+		<?php
+			$error = "";
+	
+			if($_SERVER["REQUEST_METHOD"] == "GET"){
+ 
+			if(isset($_GET['submit'])){
+
+   			 $error = "";
+		}
+    			if(isset($_GET['first'])){
+       				$first = $_GET['first'];
+   		 	} else {
+        			$error .= '';
+    			}
+
+    			echo $error;
+		}
+	   		if(isset($_GET['last'])){
+       				 $last = $_GET['last'];
+    			} else {
+        		$error .= '';
+    		}
+
+    			echo $error;
+
+	   		if(isset($_GET['email'])){
+       		 		$email = $_GET['email'];
+    			} else {
+        		$error .= '';
+   		}
+
+   			echo $error;
+
+	  	 	if(isset($_GET['qcc'])){
+        			$qcc = $_GET['qcc'];
+    			} else {
+        		$error .= '';
+    		}
+
+    			echo $error;
+			
+			if(isset($error)){
+				echo $error;    
+    			} else {
+		
+		echo $_GET['first'];
+		echo $_GET['last'];
+		echo $_GET['email'];
+		echo $_GET['qcc'];
+		
+ 	}
+
+?>
+
+		
+		</div>
+	</div>
+</div>
 					<ul>
 						<li class="address">4000 Central Florida Blvd, Orlando FL, 32816</li>
 						<li class="address">(407) 724-8830</li>
