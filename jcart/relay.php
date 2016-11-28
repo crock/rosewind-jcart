@@ -10,8 +10,10 @@ header('Content-type: text/html; charset=utf-8');
 
 // Include jcart before session start
 include_once('jcart.php');
+require('../controllers/config.php');
+require('../controllers/controller.php');
 
 // Process input and return updated cart HTML
-$jcart->display_cart();
+$jcart->display_cart('all');
 
 ?>

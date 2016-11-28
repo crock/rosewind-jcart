@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Catalog');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 	require('controllers/search.php');
 
@@ -13,7 +14,7 @@
 	<body>
 		<?php include_once("controllers/tracking.php") ?>
 		<?php include("models/header.php"); ?>
-
+		
 		<div class="container">
 			<div class="row">
 				<div class="product-filters col-lg-3 col-md-4">
@@ -56,85 +57,96 @@
 					<?php } ?>
 					</div>
 					<?php foreach ($search_results['products'] as $product) { ?>
-					<div class="col-lg-4 col-sm-6 product-result">
-			        	<div class="thumbnail">
-							<div class="product-img">
-				                <img src="<?php echo $product['img']; ?>" alt="<?php echo $product['product_name']; ?>">
-								<?php if (!isset($_SESSION['cart_contents'][$product['product_id']])) { ?>
-								<button type="submit" class="btn btn-success" name="add" value="<?php echo $product['product_id']; ?>" form="addtocart">Add to cart</button>
-								<?php } else { ?>
-								<button type="submit" class="btn btn-warning">In Cart</button>
-								<?php } ?>
-							</div>
-							<div class="product-info">
-				                <div class="caption">
-									<h4 class="pull-right">$<?php echo number_format($product['price'], 2, '.', ','); ?></h4>
-									<h4><a href="product.php?product=<?php echo $product['product_id']; ?>"><?php echo $product['product_name']; ?></a></h4>
-									<p><?php echo $product['description']; ?></p>
-				                </div>
-				                <div class="ratings">
-										<!-- Rating System -->
-										<?php
-										$product_id = $product['product_id'];
-										$rates = "SELECT AVG(rating) FROM reviews WHERE product_id = $product_id";
-										$average = safe_query($rates);
-										$val = ROUND($average[0]['AVG(rating)']);
+						<div class="col-lg-4 col-sm-6 product-result">
+				        	<div class="thumbnail">
+								<div class="product-img">
+					                <img src="<?php echo $product['img']; ?>" alt="<?php echo $product['product_name']; ?>">
+									<form class="jcart" method="post" action="">
+										<fieldset>
+											<input type="hidden" name="jcartToken" value="<?php echo $_SESSION['jcartToken']; ?>">
+											<input type="hidden" name="my-item-id" value="<?php echo $product['product_id']; ?>">
+											<input type="hidden" name="my-item-name" value="<?php echo $product['product_name']; ?>">
+											<input type="hidden" name="my-item-price" value="<?php printf($product['price'], "%f"); ?>">
+											<input type="hidden" name="my-item-qty" value="1">
+											<input type="hidden" name="my-item-url" value="product.php?product=<?php echo $product['product_id']; ?>">
+											<?php //if () { ?>
+											<input type="submit" class="btn btn-success" name="my-add-button" value="Add to cart">
+											<?php //} else { ?>
+											<input type="submit" class="btn btn-warning" name="my-add-button" value="In cart">
+											<?php //} ?>
+										</fieldset>
+									</form>
+									<!--<button type="submit" class="btn btn-warning" disabled>In Cart</button>-->
+								</div>
+								<div class="product-info">
+					                <div class="caption">
+										<h4 class="pull-right">$<?php echo number_format($product['price'], 2, '.', ','); ?></h4>
+										<h4><a href="product.php?product=<?php echo $product['product_id']; ?>"><?php echo $product['product_name']; ?></a></h4>
+										<p><?php echo $product['description']; ?></p>
+					                </div>
+					                <div class="ratings">
+											<!-- Rating System -->
+											<?php
+											$product_id = $product['product_id'];
+											$rates = "SELECT AVG(rating) FROM reviews WHERE product_id = $product_id";
+											$average = safe_query($rates);
+											$val = ROUND($average[0]['AVG(rating)']);
 
-										if ($val == 1){
-											echo '
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-										';}
-										else if ($val == 2){
-											echo '
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-										';}
-										else if ($val == 3){
-											echo '
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-										';}
-										else if ($val == 4){
-											echo '
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star"></span>
-										';}
-										else if ($val == 5){
-											echo '
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-												<span class="fa fa-star checked"></span>
-										';}
-										else{
-											echo '
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-												<span class="fa fa-star"></span>
-										';}
-									?>
-									</p>
-									<a href="product.php?product=<?php echo $product_id?>#reviews"><p class="pull-right"><?php echo $product['review_count']; ?> reviews</p></a>
-				                </div>
-							</div>
-			        	</div>
-			        </div>
+											if ($val == 1){
+												echo '
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+											';}
+											else if ($val == 2){
+												echo '
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+											';}
+											else if ($val == 3){
+												echo '
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+											';}
+											else if ($val == 4){
+												echo '
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+											';}
+											else if ($val == 5){
+												echo '
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+											';}
+											else{
+												echo '
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+											';}
+										?>
+										</p>
+										<a href="product.php?product=<?php echo $product_id?>#reviews"><p class="pull-right"><?php echo $product['review_count']; ?> reviews</p></a>
+					                </div>
+								</div>
+				        	</div>
+				        </div>
 					<?php } ?>
 					<div class="col-xs-12 text-center">
 						<ul class="pagination">
@@ -145,7 +157,6 @@
 					</div>
 				</div>
 			</div>
-			<form id="addtocart"></form>
 		</div>
 
 		<?php include("models/footer.php"); ?>

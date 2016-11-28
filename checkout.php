@@ -2,7 +2,7 @@
 	define('PAGE_TITLE', 'Checkout');
 	require('controllers/controller.php');
 
-	$cart_products = retrieve_cart();
+	/*//$cart_products = retrieve_cart();
 
     if (empty($cart_products)) {
         header("Location: cart.php");
@@ -44,7 +44,7 @@
 		} else {
 			header("Location: checkout.php?atype=danger&alert=" . urlencode("Something went wrong. Please try your order again!"));
 		}
-	}
+	}*/
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +67,7 @@
                 <li><a href="#billing" data-toggle="tab">Billing</a></li>
             </ul>
 
-            <h2 class="bg-success">Order Total: $<?php echo $TOTAL_PRICE; ?></h2>
+            <h2 class="bg-success">Order Total: $<?php echo $_SESSION['TOTAL_PRICE']; ?></h2>
 
 			<form method="post">
 				<div class="tab-content clearfix">

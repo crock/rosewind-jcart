@@ -106,4 +106,9 @@
         return false;
     }
 
+    function product_image($product_id) {
+        $products = get_products("WHERE product_id = '{$product_id}'");
+
+        return $products[0]['img'];
+    }
 ?>

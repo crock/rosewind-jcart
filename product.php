@@ -10,11 +10,12 @@
 
 	$reviews = get_reviews($product['product_id'],10);
 
-	$connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    /* NO, BAD NANI */
+	//$connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-	$username = $_SESSION['username'];
+	//$username = $_SESSION['username'];
 
-	$customer = safe_query("SELECT id FROM users WHERE username = '{$username}'");
+	//$customer = safe_query("SELECT id FROM users WHERE username = '{$username}'");
 
 ?>
 

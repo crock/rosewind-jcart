@@ -26,7 +26,7 @@ if (!$config['text']['priceError']) $config['text']['priceError']         = 'Inv
 if (!$config['text']['quantityError']) $config['text']['quantityError']   = 'Item quantities must be whole numbers!';
 if (!$config['text']['checkoutError']) $config['text']['checkoutError']   = 'Your order could not be processed!';
 
-if ($_GET['ajax'] == 'true') {
+if (isset($_GET['ajax']) && $_GET['ajax'] == 'true') {
 	header('Content-type: application/json; charset=utf-8');
 	echo json_encode($config);
 }

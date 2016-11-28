@@ -26,7 +26,7 @@ $config['item']['add']            = 'my-add-button';    // Add to cart button
 
 // Your PayPal secure merchant ID
 // Found here: https://www.paypal.com/webapps/customerprofile/summary.view
-$config['paypal']['id']           = 'seller_1282188508_biz@conceptlogic.com';
+$config['paypal']['id']           = 'croc122-facilitator@gmail.com';
 
 ////////////////////////////////////////////////////////////////////////////////
 // OPTIONAL SETTINGS
@@ -81,7 +81,7 @@ $config['priceFormat']            = array('decimals' => 2, 'dec_point' => '.', '
 $config['paypal']['https']        = true;
 
 // Use PayPal sandbox?
-$config['paypal']['sandbox']      = false;
+$config['paypal']['sandbox']      = true;
 
 // The URL a visitor is returned to after completing their PayPal transaction
 $config['paypal']['returnUrl']    = '';
