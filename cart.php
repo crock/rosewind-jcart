@@ -2,8 +2,6 @@
 	define('PAGE_TITLE', 'Cart');
 	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
-
-	$cart_products = retrieve_cart();
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +13,7 @@
 		<?php include("models/header.php"); ?>
 
 		<div class="container">
-			<div id="jcart"><?php $jcart->display_cart();?></div>
+			<div id="jcart"><?php $jcart->display_cart('all');?></div>
 		</div>
 
 		<?php include("models/footer.php"); ?>

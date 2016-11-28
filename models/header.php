@@ -74,7 +74,7 @@
         			<li><a href="signin.php">Sign In</a></li>
                     <?php } ?>
                     <?php if (PAGE_TITLE != 'Admin') { ?>
-                    <li<?php echo (PAGE_TITLE == 'Cart') ? ' class="active"' : ''; ?>><a href="cart.php">Cart <?php echo (isset($jcart) && $jcart->itemCount > 0) ? '<span class="badge progress-bar-danger">' . $jcart->itemCount . '</span>' : ''; ?></a></li>
+                    <li<?php echo (PAGE_TITLE == 'Cart') ? ' class="active"' : ''; ?>><a href="cart.php">Cart<?php echo (isset($jcart) && $jcart->itemCount > 0) ? " <span class='badge progress-bar-danger'>{$jcart->itemCount}</span>" : ""?></a></li>
                     <?php } else { ?>
                     <li><a href="admin.php?view=catalog">Catalog</a></li>
             		<li><a href="admin.php?view=users">Users</a></li>

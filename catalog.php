@@ -14,7 +14,7 @@
 	<body>
 		<?php include_once("controllers/tracking.php") ?>
 		<?php include("models/header.php"); ?>
-		
+
 		<div class="container">
 			<div class="row">
 				<div class="product-filters col-lg-3 col-md-4">
@@ -69,11 +69,7 @@
 											<input type="hidden" name="my-item-price" value="<?php printf($product['price'], "%f"); ?>">
 											<input type="hidden" name="my-item-qty" value="1">
 											<input type="hidden" name="my-item-url" value="product.php?product=<?php echo $product['product_id']; ?>">
-											<?php //if () { ?>
 											<input type="submit" class="btn btn-success" name="my-add-button" value="Add to cart">
-											<?php //} else { ?>
-											<input type="submit" class="btn btn-warning" name="my-add-button" value="In cart">
-											<?php //} ?>
 										</fieldset>
 									</form>
 									<!--<button type="submit" class="btn btn-warning" disabled>In Cart</button>-->

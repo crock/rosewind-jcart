@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Checkout');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 
 	/*//$cart_products = retrieve_cart();
