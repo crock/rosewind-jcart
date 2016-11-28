@@ -3,6 +3,7 @@
     require('config.php');
     require('sessions.php');
 
+    $product_ids = array();
     // Global vars
     $all_categories = get_categories();
 

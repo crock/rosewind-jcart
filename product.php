@@ -16,7 +16,6 @@
 	//$username = $_SESSION['username'];
 
 	//$customer = safe_query("SELECT id FROM users WHERE username = '{$username}'");
-
 ?>
 
 <!DOCTYPE html>
@@ -152,11 +151,26 @@
 								<?php
 									echo "<p id='price_num'> $" . $product['price'] . "</p><br/>" ;
 								?>
-							<div class="action">
-								<form action="catalog.php">
+							<div>
+                                <form class="jcart" method="post" action="">
+                                    <fieldset>
+                                        <input type="hidden" name="jcartToken" value="<?php echo $_SESSION['jcartToken']; ?>">
+                                        <input type="hidden" name="my-item-id" value="<?php echo $product['product_id']; ?>">
+                                        <input type="hidden" name="my-item-name" value="<?php echo $product['product_name']; ?>">
+                                        <input type="hidden" name="my-item-price" value="<?php printf($product['price'], "%f"); ?>">
+                                        <input type="hidden" name="my-item-qty" value="1">
+                                        <input type="hidden" name="my-item-url" value="product.php?product=<?php echo $product['product_id']; ?>">
+                                        <?php if (!in_array($product['product_id'], $product_ids)) { ?>
+                                        <input type="submit" class="btn btn-success" name="my-add-button" value="Add to cart">
+                                        <?php } else { ?>
+                                        <input type="submit" class="btn btn-warning" name="my-add-button" value="In cart">
+                                        <?php } ?>
+                                    </fieldset>
+                                </form>
+								<!--<form action="catalog.php">
 									<input type="hidden" name="add" value="<?php echo $product['product_id']; ?>"></input>
 									<button class="add-to-cart btn btn-success" type="submit">Add to Cart</button>
-								</form>
+								</form>-->
 								<!--<button class="review btn btn-default" type="button">leave a review</button>
 								<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>-->
 							</div>
