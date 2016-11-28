@@ -635,3 +635,23 @@ footer .social li:hover {
 .gallery_img{
 	max-width: 100%;
 }
+
+.contact_div{
+	display: block;
+	text-align: center;
+}
+
+#contact_form{
+	margin-left: 50px;
+	margin-right: auto;
+	width: 100%;
+	text-align:left;
+}
+
+#contact_submit{
+	font-size: 18px;
+}
+
+.contact_form{
+	font-size: 18px;
+}

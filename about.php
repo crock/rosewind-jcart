@@ -90,6 +90,27 @@
 						<li class="address">(407) 724-8830</li>
 						<li class="address">rosewindpaths@gmail.com</li>
 					</ul>
+				<!-- Contact form -->
+				<!--
+				<br/>
+				<br/>
+				<form id="contact_form" action="mailto:someone@example.com" method="POST" >
+					<div class="row">
+						<label for="name" class="contact_form">Your name:</label><br />
+						<input id="name" class="input" name="name" type="text" value="" size="40" /><br />
+					</div>
+					<div class="row">
+						<label for="email" class="contact_form">Your email:</label><br />
+						<input id="email" class="input" name="email" type="text" value="" size="40" /><br />
+					</div>
+					<div class="row">
+						<label for="message" class="contact_form">Your message:</label><br />
+						<textarea id="message" class="input" name="message" rows="7" cols="40"></textarea><br />
+					</div>
+					<br/>
+					<input id="contact_submit" type="submit" class="btn btn-success" value="Send" />
+				</form>
+				-->
 			</div>
 		</div><!-- end .container -->
 		<?php include("models/footer.php"); ?>
