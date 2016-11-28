@@ -635,3 +635,11 @@ footer .social li:hover {
 .gallery_img{
 	max-width: 100%;
 }
+
+fieldset {
+	//display: none;
+}
+
+#jcart fieldset {
+	//display: initial;
+}

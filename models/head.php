@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Rosewind Paths %TITLE%</title>
-	
+
 	<!-- ALL THE FAVI ICONS -->
 	<link rel="apple-touch-icon" sizes="57x57" href="favi_icons/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="favi_icons/apple-icon-60x60.png">
@@ -37,6 +37,9 @@
 			document.write('<script src="js/jquery-2.2.0.min.js"><\/script>');
 		}
 	</script>
+
+	<!-- jCart AJAX JS -->
+	<script type="text/javascript" src="jcart/js/jcart.min.js"></script>
 
 	<!-- Bootstrap JS from CDN -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

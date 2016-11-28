@@ -15,7 +15,11 @@ class Jcart {
    private $qtys      = array();
    private $urls      = array();
    private $subtotal  = 0;
-   private $itemCount = 0;
+   /*
+    * I don't care what the developer says, I need this property.
+    */
+   //private $itemCount = 0;
+   public $itemCount = 0;
 
    function __construct() {
 
@@ -465,121 +469,81 @@ class Jcart {
          return $tabs;
       }
 
-      // If there's an error message wrap it in some HTML
-      if ($errorMessage)   {
-         $errorMessage = "<p id='jcart-error'>$errorMessage</p>";
-      }
+      $SUBTOTAL = number_format($this->subtotal, $priceFormat['decimals'], $priceFormat['dec_point'], $priceFormat['thousands_sep']);
+      $TOTAL_TAX = number_format($SUBTOTAL * 0.06 + 5, $priceFormat['decimals'], $priceFormat['dec_point'], $priceFormat['thousands_sep']);
+      $_SESSION['TOTAL_PRICE'] = number_format($SUBTOTAL + $TOTAL_TAX, $priceFormat['decimals'], $priceFormat['dec_point'], $priceFormat['thousands_sep']);$SUBTOTAL + $TOTAL_TAX;
 
-      // Display the cart header
-      echo tab(1) . "$errorMessage\n";
-      echo tab(1) . "<form method='post' action='$checkout'>\n";
-      echo tab(2) . "<fieldset>\n";
-      echo tab(3) . "<input type='hidden' name='jcartToken' value='{$_SESSION['jcartToken']}' />\n";
-      echo tab(3) . "<table border='1'>\n";
-      echo tab(4) . "<thead>\n";
-      echo tab(5) . "<tr>\n";
-      echo tab(6) . "<th colspan='3'>\n";
-      echo tab(7) . "<strong id='jcart-title'>{$config['text']['cartTitle']}</strong> ($this->itemCount $itemsText)\n";
-      echo tab(6) . "</th>\n";
-      echo tab(5) . "</tr>". "\n";
-      echo tab(4) . "</thead>\n";
-
-      // Display the cart footer
-      echo tab(4) . "<tfoot>\n";
-      echo tab(5) . "<tr>\n";
-      echo tab(6) . "<th colspan='3'>\n";
-
-      // If this is the checkout hide the cart checkout button
-      if ($isCheckout !== true) {
-         $src = ''; //new
-         if ($config['button']['checkout']) {
-            $inputType = "image";
-            $src = " src='{$config['button']['checkout']}' alt='{$config['text']['checkout']}' title='' ";
-         }
-         echo tab(7) . "<input type='$inputType' $src id='jcart-checkout' name='jcartCheckout' class='jcart-button' value='{$config['text']['checkout']}' />\n";
-      }
-
-      echo tab(7) . "<span id='jcart-subtotal'>{$config['text']['subtotal']}: <strong>$currencySymbol" . number_format($this->subtotal, $priceFormat['decimals'], $priceFormat['dec_point'], $priceFormat['thousands_sep']) . "</strong></span>\n";
-      echo tab(6) . "</th>\n";
-      echo tab(5) . "</tr>\n";
-      echo tab(4) . "</tfoot>\n";
-
-      echo tab(4) . "<tbody>\n";
-
-      // If any items in the cart
-      if($this->itemCount > 0) {
-
-         // Display line items
-         foreach($this->get_contents() as $item)   {
-            echo tab(5) . "<tr>\n";
-            echo tab(6) . "<td class='jcart-item-qty'>\n";
-            echo tab(7) . "<input name='jcartItemId[]' type='hidden' value='{$item['id']}' />\n";
-            echo tab(7) . "<input id='jcartItemQty-{$item['id']}' name='jcartItemQty[]' size='2' type='text' value='{$item['qty']}' />\n";
-            echo tab(6) . "</td>\n";
-            echo tab(6) . "<td class='jcart-item-name'>\n";
-
-            if ($item['url']) {
-               echo tab(7) . "<a href='{$item['url']}'>{$item['name']}</a>\n";
-            }
-            else {
-               echo tab(7) . $item['name'] . "\n";
-            }
-            echo tab(7) . "<input name='jcartItemName[]' type='hidden' value='{$item['name']}' />\n";
-            echo tab(6) . "</td>\n";
-            echo tab(6) . "<td class='jcart-item-price'>\n";
-            echo tab(7) . "<span>$currencySymbol" . number_format($item['subtotal'], $priceFormat['decimals'], $priceFormat['dec_point'], $priceFormat['thousands_sep']) . "</span><input name='jcartItemPrice[]' type='hidden' value='{$item['price']}' />\n";
-            echo tab(7) . "<a class='jcart-remove' href='?jcartRemove={$item['id']}'>{$config['text']['removeLink']}</a>\n";
-            echo tab(6) . "</td>\n";
-            echo tab(5) . "</tr>\n";
-         }
-      }
-
-      // The cart is empty
-      else {
-         echo tab(5) . "<tr><td id='jcart-empty' colspan='3'>{$config['text']['emptyMessage']}</td></tr>\n";
-      }
-      echo tab(4) . "</tbody>\n";
-      echo tab(3) . "</table>\n\n";
-
-      echo tab(3) . "<div id='jcart-buttons'>\n";
-
-      if ($config['button']['update']) {
-         $inputType = "image";
-         $src = " src='{$config['button']['update']}' alt='{$config['text']['update']}' title='' ";
-      }
-
-      echo tab(4) . "<input type='$inputType' $src name='jcartUpdateCart' value='{$config['text']['update']}' class='jcart-button' />\n";
-
-      if ($config['button']['empty']) {
-         $inputType = "image";
-         $src = " src='{$config['button']['empty']}' alt='{$config['text']['emptyButton']}' title='' ";
-      }
-
-      echo tab(4) . "<input type='$inputType' $src name='jcartEmpty' value='{$config['text']['emptyButton']}' class='jcart-button' />\n";
-      echo tab(3) . "</div>\n";
-
-      // If this is the checkout display the PayPal checkout button
-      if ($isCheckout === true) {
-         // Hidden input allows us to determine if we're on the checkout page
-         // We normally check against request uri but ajax update sets value to relay.php
-         echo tab(3) . "<input type='hidden' id='jcart-is-checkout' name='jcartIsCheckout' value='true' />\n";
-
-         // PayPal checkout button
-         $src = ''; //new
-         if ($config['button']['checkout'])   {
-            $inputType = "image";
-            $src = " src='{$config['button']['checkout']}' alt='{$config['text']['checkoutPaypal']}' title='' ";
-         }
-
-         $disablePaypalCheckout = $this->itemCount <= 0 ? " disabled='disabled'" : '';
-
-         echo tab(3) . "<input type='$inputType' $src id='jcart-paypal-checkout' name='jcartPaypalCheckout' value='{$config['text']['checkoutPaypal']}' $disablePaypalCheckout />\n";
-      }
-
-      echo tab(2) . "</fieldset>\n";
-      echo tab(1) . "</form>\n\n";
-
-      echo tab(1) . "<div id='jcart-tooltip'></div>\n";
+      ?>
+      <div id="jcart">
+          <form method='post' action="checkout.php">
+              <fieldset>
+                  <input type="hidden" name="jcartToken" value="<?php echo $_SESSION['jcartToken']; ?>">
+                  <div class="panel panel-default">
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="col-xs-5 text-center">Product</div>
+                              <div class="col-xs-1">Quantity</div>
+                              <div class="col-xs-2 text-right">Price</div>
+                              <div class="col-xs-2 text-right">Total</div>
+                              <div class="col-xs-2"></div>
+                          </div>
+                          <?php foreach ($this->get_contents() as $item) { ?>
+                          <div class="row">
+                              <div class="col-xs-4 col-md-5">
+                                  <div class="col-xs-12 col-md-3">
+                                      <img class="thumbnail" src="<?php echo product_image($item['id']); ?>" alt="<?php echo $item['name']; ?>" width="75" height="75">
+                                  </div>
+                                  <div class="col-xs-12 col-md-9">
+                                      <h4 class="media-heading"><a href="product.php?product=<?php echo $item['id']; ?>"><?php echo $item['name']; ?></a></h4>
+                                      <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                  </div>
+                              </div>
+                              <div class="col-xs-2 col-md-1 jcart-item-qty">
+                                  <input name="jcartItemId[]" type="hidden" value="<?php echo $item['id']; ?>">
+                                  <input class="form-control" id="jcartItemQty-<?php echo $item['id']; ?>" name="jcartItemQty[]" size="2" type="text" value="<?php echo $item['qty']; ?>">
+                              </div>
+                              <div class="col-xs-2 text-right"><h4>$<?php echo $item['price']; ?></h4></div>
+                              <div class="col-xs-2 text-right"><h4>$<?php //echo $product['multprice']; ?></h4></div>
+                              <div class="col-xs-2 text-right">
+                                  <a class="btn btn-danger jcart-remove" href="?jcartRemove=<?php echo $item['id']; ?>"><span class="glyphicon glyphicon-remove pull-left"></span><span class="hidden-xs hidden-sm pull-left"> Remove</span></a>
+                              </div>
+                          </div>
+                          <?php } ?>
+                          <div class="row">
+                              <div class="col-xs-6 col-sm-7 col-md-8 text-right">
+                                  <h4>Subtotal:</h4>
+                                  <h4>Shipping + Tax:</h4>
+                                  <h3>Total:</h3>
+                              </div>
+                              <div class="col-xs-4 col-sm-3 col-md-2 text-right">
+                                  <h4>$<?php echo $SUBTOTAL; ?></h4>
+                                  <h4>$<?php echo $TOTAL_TAX; ?></h4>
+                                  <h3><b>$<?php echo $_SESSION['TOTAL_PRICE']; ?></b></h3>
+                              </div>
+                              <div class="col-xs-2 col-md-2">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-4 col-sm-6 text-right">
+                          <a href="catalog.php" class="btn btn-default btn-lg" role="button"><span class="glyphicon glyphicon-th-list"></span> Back to Catalog </a>
+                      </div>
+                      <div class="col-xs-4 col-sm-3 text-right">
+                          <input type="button" class="btn btn-primary btn-lg" role="button" id="jcart-paypal-checkout" name="jcartPaypalCheckout" value="<?php echo $config['text']['checkoutPaypal']; ?>">
+                          <?php if (isset($_SESSION['cart_contents']) && !empty($_SESSION['cart_contents'])) { ?>
+                          <a href="checkout.php" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-ok"></span> Proceed to Checkout</a>
+                          <?php } ?>
+                      </div>
+                      <div class="col-xs-4 col-sm-3 text-right">
+                          <a href="checkout.php" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-ok"></span> Checkout with Card</a>
+                      </div>
+                  </div>
+                  <input type='hidden' id='jcart-is-checkout' name='jcartIsCheckout' value='true' />
+              </fieldset>
+          </form>
+      </div>
+      <?php
    }
 }
 

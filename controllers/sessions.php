@@ -3,7 +3,9 @@
     $TOTAL_TAX = 0;
     $TOTAL_PRICE = 0;
 
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 
     if (empty($_SESSION)) {
         create_session();
@@ -25,8 +27,8 @@
         $_SESSION['user_id'] = 0;
         $_SESSION['username'] = 'guest';
         $_SESSION['user_level'] = 0;
-        $_SESSION['cart_id'] = 0;
-        $_SESSION['cart_contents'] = array();
+        //$_SESSION['cart_id'] = 0;
+        //$_SESSION['cart_contents'] = array();
     }
 
     if (isset($_POST['sign_in']) && isset($_POST['username']) && isset($_POST['password'])) {
@@ -63,12 +65,12 @@
                     $_SESSION['user_level'] = 0;
             }
 
-            $_SESSION['cart_id'] = $user_data['cart_id'];
-            $_SESSION['cart_contents'] .= json_decode($user_data['products'], true);
+            //$_SESSION['cart_id'] = $user_data['cart_id'];
+            //$_SESSION['cart_contents'] .= json_decode($user_data['products'], true);
 
-            if (!is_array($_SESSION['cart_contents'])) {
-                $_SESSION['cart_contents'] = array();
-            }
+            //if (!is_array($_SESSION['cart_contents'])) {
+            //    $_SESSION['cart_contents'] = array();
+            //}
 
             safe_query("UPDATE session_log SET cart_id = '{$user_data['cart_id']}',user_type = '{$user_data['user_type']}',username = '{$username}' WHERE session_log_id = '{$_SESSION['session_id']}'");
 
@@ -139,7 +141,7 @@
         header("Location: home.php?atype=success&alert=" . urlencode("You have been signed out."));
     }
 
-    if (isset($_GET['add'])) {
+    /*if (isset($_GET['add'])) {
         add_to_cart($_GET['add']);
 
         unset($_GET['add']);
@@ -184,37 +186,44 @@
 
             safe_query("UPDATE carts SET products = '" . json_encode($_SESSION['cart_contents']) . "' WHERE cart_id = '{$_SESSION['cart_id']}'");
         }
-    }
+    }*/
 
     function retrieve_cart() {
-        global $SUBTOTAL, $TOTAL_TAX, $TOTAL_PRICE;
+        global $SUBTOTAL, $TOTAL_TAX, $TOTAL_PRICE, $jcart;
+        $product_ids = array();
 
-        if (empty($_SESSION['cart_contents'])) {
+        $contents = $jcart->get_contents();
+
+        if (!isset($jcart) || empty($contents)) {
             return array();
-        } else {
-            $cart_products = get_products("WHERE product_id = '" . implode("' OR product_id = '", array_keys($_SESSION['cart_contents'])) . "'");
+        }
 
-            if (!empty($cart_products)) {
-                $TOTAL_TAX = 5;
+        foreach ($contents as $product) {
+            $product_ids[$product['id']] = $product['qty'];
+        }
 
-                foreach ($cart_products as $key => $product) {
-                    $cart_products[$key]['price'] = money($cart_products[$key]['price']);
-                    $cart_products[$key]['quantity'] = $_SESSION['cart_contents'][$product['product_id']];
-                    $cart_products[$key]['multprice'] = money($product['price'] * $cart_products[$key]['quantity']);
+        $cart_products = get_products("WHERE product_id = '" . implode("' OR product_id = '", array_keys($product_ids)) . "'");
 
-                    $SUBTOTAL += $cart_products[$key]['multprice'];
-                    $TOTAL_TAX += round($SUBTOTAL * 0.065, 2);
-                }
+        if (!empty($cart_products)) {
+            $TOTAL_TAX = 5;
 
-                $TOTAL_PRICE = $SUBTOTAL + $TOTAL_TAX;
+            foreach ($cart_products as $key => $product) {
+                $cart_products[$key]['price'] = money($cart_products[$key]['price']);
+                $cart_products[$key]['quantity'] = $product_ids[$product['product_id']];
+                $cart_products[$key]['multprice'] = money($product['price'] * $cart_products[$key]['quantity']);
+
+                $SUBTOTAL += $cart_products[$key]['multprice'];
+                $TOTAL_TAX += round($SUBTOTAL * 0.065, 2);
             }
 
-            $SUBTOTAL = money($SUBTOTAL);
-            $TOTAL_TAX = money($TOTAL_TAX);
-            $TOTAL_PRICE = money($TOTAL_PRICE);
-
-            return $cart_products;
+            $TOTAL_PRICE = $SUBTOTAL + $TOTAL_TAX;
         }
+
+        $SUBTOTAL = money($SUBTOTAL);
+        $TOTAL_TAX = money($TOTAL_TAX);
+        $TOTAL_PRICE = money($TOTAL_PRICE);
+
+        return $cart_products;
     }
 
     function money($number) {

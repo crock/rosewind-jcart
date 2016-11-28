@@ -30,7 +30,11 @@
     function single_product($product_id) {
         $products = get_products("WHERE product_id = '{$product_id}'");
 
-        return $products[0];
+        if (!empty($products)) {
+            return $products[0];
+        }
+
+        return array();
     }
 
     function get_orders($customer_id) {
@@ -106,4 +110,9 @@
         return false;
     }
 
+    function product_image($product_id) {
+        $products = get_products("WHERE product_id = '{$product_id}'");
+
+        return $products[0]['img'];
+    }
 ?>
