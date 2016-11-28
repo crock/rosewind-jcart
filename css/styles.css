@@ -49,8 +49,8 @@ a {
     color: #f6f6f6;
 }
 .navbar-inverse {
-	background-color: #996515;
-	border-color: #996515;
+	background-color: #144430;
+	border-color: #144430;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -65,10 +65,10 @@ a {
 	list-style: none;
 }
 .navbar-custom .social i {
-	color: #54697e !important;
+	color: #748e54  !important;
 }
 .navbar-custom .social i:hover {
-	color: #9be13e !important;
+	color: #f9f9f9  !important;
 }
 .navbar-custom .social li {
 	margin: 15px 0 0 15px;
@@ -128,7 +128,7 @@ a {
 
 footer {
 	margin-top: 120px;
-	background-color: #996515;
+	background-color: #144430;
 	color: #f6f6f6;
 }
 
@@ -555,10 +555,10 @@ ul{
 	cursor: pointer;
 }
 .social li:hover {
-	background: #52361b;
+	background-color: #b2bcaa;
 }
 footer .social li:hover {
-	background: #52361b;
+	background-color: #748e54;
 }
 .social li a i {
 	font-size: 2em;
