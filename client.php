@@ -37,10 +37,40 @@
 									<label for="shipping_address">Shipping Address</label>
 									<input type="text" class="form-control" name="shipping_address" />
 								</div>
+								
+								<div class="form-group">
+									<label for="shipping_country">Shipping Country</label>
+									<select class="form-control" name="shipping_country" />
+										<option value="United States">United States</option>
+									</select>
+								</div>
+								
+								<div class="form-group">
+									<label for="shipping_state">Shipping State</label>
+									<select class="form-control" name="shipping_state" />
+										<option value="FL">Florida</option>
+										<option value="CA">California</option>
+									</select>
+								</div>
 			
 								<div class="form-group">
 									<label for="billing_address">Billing Address</label>
 									<input type="text" class="form-control" name="billing_address" />
+								</div>
+								
+								<div class="form-group">
+									<label for="billing_country">Billing Country</label>
+									<select class="form-control" name="billing_country" />
+										<option value="United States">United States</option>
+									</select>
+								</div>
+								
+								<div class="form-group">
+									<label for="billing_state">Billing State</label>
+									<select class="form-control" name="billing_state" />
+										<option value="FL">Florida</option>
+										<option value="CA">California</option>
+									</select>
 								</div>
 						
 								<input type="hidden" name="edit-profile-form" />

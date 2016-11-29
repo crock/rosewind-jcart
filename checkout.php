@@ -3,7 +3,7 @@
 	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 
-	/*//$cart_products = retrieve_cart();
+	$cart_products = retrieve_cart();
 
     if (empty($cart_products)) {
         header("Location: cart.php");
@@ -45,7 +45,7 @@
 		} else {
 			header("Location: checkout.php?atype=danger&alert=" . urlencode("Something went wrong. Please try your order again!"));
 		}
-	}*/
+	}
 ?>
 
 <!DOCTYPE html>
