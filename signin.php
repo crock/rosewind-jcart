@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Sign In');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 ?>
 

@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Home');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 ?>
 

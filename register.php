@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Register');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 
 	if (isset($_GET['errors'])) {

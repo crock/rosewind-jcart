@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Client');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 ?>
 
@@ -11,14 +12,14 @@
 		<?php include_once("controllers/tracking.php") ?>
 		<?php include("models/header.php"); ?>
 
-		
+
 		<div class="container">
 			<h1>About Us</h1>
 			<br>
 			<div class="row home-row">
 					<img class="col-sm-6 col-lg-4 gallery_img" src="img/skiing-1650760_640.jpg" alt="about_gallery1" width="300" height="213"/>
 					<img class="col-sm-6 col-lg-4 gallery_img" src="img/fall-1432252_640.jpg" alt="about_gallery2" width="300" height="213"/>
-					<img class="col-sm-6 col-lg-4 gallery_img" src="img/gibraltar-1351696_640.jpg" alt="about_gallery3" width="300" height="213"/>		
+					<img class="col-sm-6 col-lg-4 gallery_img" src="img/gibraltar-1351696_640.jpg" alt="about_gallery3" width="300" height="213"/>
 			</div>
 			<h2>Who We Are</h2>
 				<p id="intro_paragraph">
@@ -86,26 +87,26 @@
 				<hr/>
 				<h2>Contact Us</h2>
 				<form method="get" action="about.php">
-					<div class="form-group">	
+					<div class="form-group">
 						<label for="Name">First name:</label>
 						<input class="form-control" type="text" name="first" id="first" value="<?php if(isset($first)) echo $first; ?>">
 					</div>
-					
+
 					<div class="form-group">
 						<label for="City">Last name:</label>
 						<input class="form-control" type="text" name="last" id="last" value="<?php if(isset($last)) echo $last; ?>">
 					</div>
-		
+
 					<div class="form-group">
 						<label for="Email">Email:</label>
 						<input class="form-control" type="text" name="email" id="email" value="<?php if(isset($email)) echo $email; ?>">
 					</div>
-					
+
 					<div class="form-group">
 						<label for="Message">Questions:</label><br>
 						<textarea class="form-control" name="qcc" rows="10" id="qcc" value="<?php if(isset($qcc)) echo $qcc; ?>"></textarea>
 					</div>
-	
+
 					<input type="submit" name="submit" value="Submit" class="btn btn-success">
 				</form>
 			</div>

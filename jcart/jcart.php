@@ -261,12 +261,9 @@ class Jcart {
    * Process and display cart
    */
    public function display_cart($mode) {
-      global $product_ids;
-
 	  if ($mode == 'all') {
 	      $config = $this->config;
 	      $errorMessage = null;
-          $product_ids = array();
 
 	      // Simplify some config variables
 	      $checkout = $config['checkoutPath'];
@@ -495,7 +492,6 @@ class Jcart {
 
 	         // Display line items
 	         foreach($this->get_contents() as $item)   {
-                $product_ids[] = $item['id'];
 				$product = single_product($item['id']);
 
 	            echo "<tr>";

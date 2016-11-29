@@ -1,5 +1,6 @@
 <?php
     define('PAGE_TITLE', 'Product');
+    include_once('jcart/jcart.php');
     require('controllers/controller.php');
 
     if (!isset($_GET['product'])) {
@@ -9,6 +10,11 @@
     $product = single_product($_GET['product']);
 
 	$reviews = get_reviews($product['product_id'],10);
+
+    $cart_products = $jcart->get_contents();
+	$product_ids = array_map(function($item) {
+		return $item['id'];
+	}, $cart_products);
 
     /* NO, BAD NANI */
 	//$connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);

@@ -1,5 +1,6 @@
 <?php
 	define('PAGE_TITLE', 'Client');
+	include_once('jcart/jcart.php');
 	require('controllers/controller.php');
 ?>
 
@@ -11,7 +12,7 @@
 		<?php include_once("controllers/tracking.php") ?>
 		<?php include("models/header.php"); ?>
 
-		
+
 		<div class="container">
 			<h1>Our Policies </h1>
 				<ul>

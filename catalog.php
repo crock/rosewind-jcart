@@ -5,6 +5,10 @@
 	require('controllers/search.php');
 
 	$search_results = get_product_results('catalog.php');
+	$cart_products = $jcart->get_contents();
+	$product_ids = array_map(function($item) {
+		return $item['id'];
+	}, $cart_products);
 ?>
 
 <!DOCTYPE html>
