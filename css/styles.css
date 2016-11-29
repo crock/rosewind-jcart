@@ -21,6 +21,10 @@ a {
 	background-color: #54697e;
 }
 
+#edit-profile-btn {
+	margin-bottom: 25px;
+}
+
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
