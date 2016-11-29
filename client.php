@@ -11,6 +11,29 @@
 	$customer = $customer[0];
 
 	$orders = safe_query("SELECT * FROM orders WHERE customer_info_id = '{$customer['id']}'");
+
+	if (isset($_POST['edit-profile-form'])) {
+		$shipping_address = $_POST['shipping_address'];
+		$shipping_country = $_POST['shipping_country'];
+		$shipping_state = $_POST['shipping_state'];
+		$billing_address = $_POST['billing_address'];
+		$billing_country = $_POST['billing_country'];
+		$billing_state = $_POST['billing_state'];
+		$id = $_SESSION['user_id'];
+		
+		$status = false;
+		
+		$query = "INSERT INTO postal_addresses (customer_info_id, shipping_address, shipping_state, shipping_country, billing_address, billing_state, billing_country) VALUES ('{$id}','{$shipping_address}','{$shipping_state}','{$shipping_country}','{$billing_address}','{$billing_state}','{$billing_country}')";
+		$result = safe_query($query);
+		
+		if ($status) {
+			header("Location: client.php?atype=success&alert=" . urlencode("Profile updated!"));
+		} else {
+			header("Location: client.php?atype=danger&alert=" . urlencode('Profile failed to update!'));
+		}
+	}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +110,10 @@
 			
 			
 			<h2>Welcome, <?php echo $customer['username']; ?>!</h2>
+			
+			<? if (isset($_GET['atype']) && isset($_GET['alert'])) { ?>
+				<div class="alert <?php echo ($_GET['atype'] == 'success') ? 'alert-success' : 'alert-danger'; ?>" role="alert"><?php echo urldecode($_GET['alert']); ?></div>
+			<? } ?>
 			
 			<!-- Button trigger modal -->
 			<button type="button" id="edit-profile-btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#edit-profile">
