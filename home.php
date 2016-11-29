@@ -67,6 +67,9 @@
 							<img class="gallery_img" src="img/gibraltar-1351696_640.jpg" alt="home_gallery1" width="300" height="220"/>
 							<h4 class="card-title">Discover Affordable Destinations</h4>
 							<p class="card-text">Would you believe that there might be an area around you that's perfect for outdoor travel and trekking that you might not know about? We'll be happy to let you know where they are and how to get there.</p>
+							<hr/>
+							<img class="profile-img" alt="profile one" src="http://lorempixel.com/100/100/people/"/>
+							<p class="cart-text quote">"We were wondering just how we were going to afford to head on an adventure trip out of state, but Rosewind Paths was able to coordinate an affordable plan for us, as well as give us discounts on essentials we needed."<br> - Adrian Robinson</p>
 						</div>
 					</div>
 				</div>
@@ -77,6 +80,9 @@
 							<img class="gallery_img" src="img/fall-1432252_640.jpg" alt="home_gallery2" width="320" height="220"/>
 							<h4 class="card-title">From Casual to Challenging</h4>
 							<p class="card-text">We have different branches of excursions, from enjoying a stroll through a local park or backpacking through the mountains on a long excursion. You'll be able to see adventures of all levels near you, and choose what's best for your lifestyle.</p>
+							<hr/>
+							<img class="profile-img" alt="profile two" src="http://lorempixel.com/g/100/100/people/"/>
+							<p class="cart-text quote">"I was concerned that my family and I weren't going to be able to make the trip because of how bad my back was. I wanted to still travel with them but quite a few travel plans included too many strenuous activites. Rosewind Paths was able to give us a better and more casual alternative at a lower price that's in the same state. I highly recommend this business."<br> - Jesse Matthews</p>
 						</div>
 					</div>
 				</div>
@@ -87,6 +93,9 @@
 							<img class="gallery_img" src="img/new-zealand-1805932_640.jpg" alt="home_gallery2" width="320" height="220"/>
 							<h4 class="card-title">Never Go Unprepared</h4>
 							<p class="card-text">Want to travel to the ends of the earth but not sure just what to take? We'll make sure you get there with everything you need for the activities and adventure that you'll have on your travels. From food to full equipment, our catalog has an array of several products and provisions.</p>
+							<hr/>
+							<img class="profile-img" alt="profile three" src="http://lorempixel.com/100/100/sports/"/>
+							<p class="cart-text quote">"Since this was going to be our first big travle trip outside of the state, we were worried about forgetting something important. Especially because we were planning to go rock climbing. Rosewind Paths was able to make sure that we had a list of all the essentials so we weren't caught without something we needed."<br> - Julian Smith</p>
 						</div>
 					</div>
 				</div>

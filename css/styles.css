@@ -647,3 +647,11 @@ fieldset {
 #jcart fieldset {
 	//display: initial;
 }
+
+.quote{
+	font-size: 16px;
+}
+
+.profile-img{
+	float: right;
+}
