@@ -22,7 +22,47 @@
 		<?php include("models/header.php"); ?>
 
 		<div class="container">
+			<!-- Modal -->
+			<form method="post" action="client.php">
+				<div class="modal fade" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="editProfile">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+							</div>
+			
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="shipping_address">Shipping Address</label>
+									<input type="text" class="form-control" name="shipping_address" />
+								</div>
+			
+								<div class="form-group">
+									<label for="billing_address">Billing Address</label>
+									<input type="text" class="form-control" name="billing_address" />
+								</div>
+						
+								<input type="hidden" name="edit-profile-form" />
+							</div>
+			
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-success">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			
 			<h2>Welcome, <?php echo $customer['username']; ?>!</h2>
+			
+			<!-- Button trigger modal -->
+			<button type="button" id="edit-profile-btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#edit-profile">
+				<i class="fa fa-edit"></i> Edit Profile
+			</button>
+			
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="row">
