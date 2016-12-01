@@ -52,6 +52,10 @@ a {
 .navbar-inverse .navbar-nav > li > a {
     color: #f6f6f6;
 }
+.navbar-inverse {
+	background-color: #144430;
+	border-color: #144430;
+}
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
     color: #f6f6f6;
@@ -65,7 +69,10 @@ a {
 	list-style: none;
 }
 .navbar-custom .social i {
-	color: #54697e !important;
+	color: #748e54  !important;
+}
+.navbar-custom .social i:hover {
+	color: #f9f9f9  !important;
 }
 .navbar-custom .social li {
 	margin: 15px 0 0 15px;
@@ -125,7 +132,7 @@ a {
 
 footer {
 	margin-top: 120px;
-	background-color: #333;
+	background-color: #144430;
 	color: #f6f6f6;
 }
 
@@ -144,8 +151,9 @@ label{
 
 /* About Us Page */
 ul{
-    list-style: none;
-	list-style-type: none;
+    	list-style: none;
+    	list-style-type: none;
+	margin-top: 10%;
 }
 
 .policy_list{
@@ -511,7 +519,7 @@ ul{
 }
 .footer h3 {
 	border-bottom: 1px solid #BAC1C8;
-	color: #687d94;
+	color: #edeff1;
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 27px;
@@ -524,14 +532,14 @@ ul{
 	margin-left: 0;
 	padding-left: 0;
 	margin-top: 15px;
-	color: #687d94;
+	color: #edeff1;
 }
 .footer ul li a {
 	padding: 0 0 5px 0;
 	display: block;
 }
 .footer a {
-	color: #78828D
+	color: #edeff1;
 }
 .social {
 	margin-top: 0 !important;
@@ -551,10 +559,10 @@ ul{
 	cursor: pointer;
 }
 .social li:hover {
-	background: #aecbe9;
+	background-color: #b2bcaa;
 }
 footer .social li:hover {
-	background: #54697e;
+	background-color: #748e54;
 }
 .social li a i {
 	font-size: 2em;
@@ -640,10 +648,51 @@ footer .social li:hover {
 	max-width: 100%;
 }
 
-fieldset {
-	//display: none;
+/*contact form*/
+
+#page-wrap {
+	width: 660px;
+	background: #78828d;
+	padding: 20px 50px 20px 50px;
+	margin: 20px auto;
+	min-height: 500px;
+	height: auto !important;
+	height: 500px;
 }
 
-#jcart fieldset {
-	//display: initial;
+#contact {
+	width: 600px;
+	margin-top: 25px;
+}
+
+#contact input, #contact textarea {
+	padding: 5px;
+	width: 471px;
+	font-family: Helvetica, sans-serif;
+	font-size: 1.4em;
+	margin: 0px 0px 10px 0px;
+	border: 2px solid #ccc;
+}
+
+#contact textarea {
+	height: 90px;
+}
+
+#contact textarea:focus, #contact input:focus {
+	border: 2px solid #900;
+}
+
+#contact input.submit-button {
+	width: 100px;
+	float: right;
+}
+
+label {
+	float: left;
+	text-align: right;
+	margin-right: 15px;
+	width: 100px;
+	padding-top: 5px;
+	font-size: 1.4em;
+	font-family: 'Lato', sans-serif;
 }
